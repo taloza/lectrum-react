@@ -7,6 +7,7 @@ import { string } from "prop-types";
 import {getUniqueID } from '../../instruments';
 import Counter from "../Counter";
 import Catcher from "../Catcher";
+import Spinner from "../Spinner";
 
 
 export default class Feed extends Component{
@@ -18,7 +19,9 @@ export default class Feed extends Component{
 
 state = {
     posts:[],
+    isSpinning:true
 }
+
 _createPost = (comment) =>{
     this.setState((prevState) =>({
         posts:[{id:getUniqueID(), comment }, ...prevState.posts],
@@ -34,12 +37,10 @@ _deletePost = (commentId) =>{
    });
 
 }
-
-
     render(){
         //console.log(this.props)
         const {avatar, currentUserFirstName, currentUserLastName} = this.props;
-        const{ posts} = this.state;
+        const{ posts, isSpinning} = this.state;
 
         const postsJSX = posts.map((post)=> (
             <Catcher
@@ -66,6 +67,7 @@ _deletePost = (commentId) =>{
                 />
                 <Counter count={this.state.posts.length}/>
                 {postsJSX}
+                <Spinner isSpinning = {isSpinning}/>
             </section>
         );
     }
