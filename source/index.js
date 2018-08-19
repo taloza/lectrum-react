@@ -5,21 +5,14 @@ import ReactDOM from 'react-dom';
 // Theme
 import './theme/init';
 
-const start = (
-    <h1
-        style = { {
-            display:         'flex',
-            justifyContent:  'center',
-            alignItems:      'center',
-            minHeight:       '100vh',
-            backgroundColor: '#070A13',
-            color:           'white',
-            fontSize:        24,
-            fontWeight:      '600',
-            textAlign:       'center',
-        } }>
-        Добро пожаловать на интенсив по React
-    </h1>
-);
+import App from './containers/App';
 
-ReactDOM.render(start, document.getElementById('app'));
+// const H1 = <h1 title = 'a title'> Hellooo!</h1>;
+// const H1 = () => <h1 title = 'a title'> Hellooo!</h1>;
+
+// const list = [...Array(10).keys()].map((item, index) =>
+//     <li key = {index}> list item:{item} </li>
+// );
+
+ReactDOM.render( <App/>, document.getElementById('app'));
+
