@@ -1,16 +1,20 @@
-import React, {Component} from 'react';
-import {withProfile} from '../../HOC/withProfile';
-import  Styles from './styles.m.css';
+import React, { Component } from 'react';
+import { string } from 'prop-types';
+import { withProfile } from '../../HOC/withProfile';
+
+import Styles from './styles.m.css';
+import { createPostfix } from 'typescript';
 
 export class Composer extends Component {
     static propTypes = {
-    }
+        avatar: string.isRequired,
+    };
 
     state = {
-       comment:'',
+        comment: '',
     }
 
-    _handleTextAreaChange = (event) => {
+    _handleTextareaChange = (event) => {
         const { value } = event.target;
 
         this.setState({
@@ -18,66 +22,61 @@ export class Composer extends Component {
         });
     }
 
-    _createPost(){
+    _createPost() {
         const { _createPostAsync } = this.props;
         const { comment } = this.state;
 
         if (!comment.trim()) {
             return null;
         }
-        _createPostAsync(comment);
-        this.setState({
-            comment:'',
-        })
-    };
 
-    _handleFormSubmit = (event) => {
-        event.preventDefault();
-        const { comment } = this.state;
-        if (!comment.trim()) {
-            return null;
-        }
-        this._createPost(comment);
+        _createPostAsync(comment);
+
         this.setState({
             comment: '',
         })
     }
 
-    _handleTextareaCopy = (event) => {
-        event.preventDefault();
-        };
-
     _handleTextareaKeyPress = (event) => {
-        const enterKey = event.key ==='Enter';
-        if(enterKey){
+        const enterKey = event.key === 'Enter';
+
+        if (enterKey) {
             event.preventDefault();
             this._createPost();
         }
-    };
+    }
 
+    _handleSubmit = (event) => {
+        event.preventDefault();
+        this._createPost();
+    }
 
-    render(){
-        const {avatar, currentUserFirstName} = this.props;
-        const {comment} = this.state;
+    _handleTextareaCopy = (event) => {
+        event.preventDefault();
+    }
 
-        return(
-               <section className={Styles.composer}>
-                       <img src={avatar}/>
-                       <form
-                            onSubmit = {this._handleFormSubmit}
-                            >
-                                <textarea
-                                    placeholder = {`What is on your mind, ${currentUserFirstName}`}
-                                    value = {comment}
-                                    onChange  = {this._handleTextAreaChange}
-                                    onCopy = {this._handleTextareaCopy}
-                                    onKeyPress = {this._handleTextareaKeyPress}
-                                />
-                                <input type='submit' value='Post'/>
-                            </form>
-                        </section>
-            )
-        }
+    render () {
+        const { avatar, currentUserFirstName } = this.props;
+        const { comment } = this.state;
+
+        return (
+            <section className = { Styles.composer } >
+                <img src = { avatar } />
+                <form
+                    onSubmit = { this._handleSubmit }
+                >
+                    <textarea
+                        placeholder = { `What's on your mind, ${currentUserFirstName}` }
+                        value = { comment }
+                        onCopy = { this._handleTextareaCopy }
+                        onChange = { this._handleTextareaChange }
+                        onKeyPress = { this._handleTextareaKeyPress }
+                    />
+                    <input type = 'submit' value = 'Post' />
+                </form>
+            </section>
+        );
+    }
 }
 
 export default withProfile(Composer);
