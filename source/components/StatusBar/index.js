@@ -1,28 +1,49 @@
-
 import React, {Component} from 'react';
 import {withProfile } from '../../HOC/withProfile';
-import  Styles from './styles.m.css';
+import {socket} from "../../socket";
+import cx from 'classnames'
 
+import  Styles from './styles.m.css';
 @withProfile
 export default class StatusBar extends Component{
 
+    state = {
+        online:false,
+    }
     componentDidMount(){
-        console.log('%c componentDidMount', 'background: #222; color:#ccc');
+       socket.on('connect', () => {
+           this.setState({
+               online: true,
+           });
+       });
+
+        socket.on('disconnect', () => {
+            this.setState({
+                online: false,
+            });
+        });
     }
 
-    componentWillMount(){
-        console.log('%c componentWillMount', 'background: #222; color:#ccc');
+    componentWillUnMount(){                     //чтобі не біло утечек памяти
+        socket.removeListener('connect');
+        socket.removeListener('disconnect');
     }
-
 
     render(){
-        console.log('%c render', 'background: #222; color:#ccc');
+
         const{avatar, currentUserFirstName, currentUserLastName} = this.props;
+        const {online} = this.state
+        const statusStyles = cx(Styles.status, {
+            [Styles.online]:online,
+            [Styles.offline]:!online,
+        });
+        const statusMessage = online ? 'Online' : 'Offline';
+
         return(
                          <section className = {Styles.statusBar}>
-                            <div className = {`${Styles.offline} ${Styles.status}`}>
+                            <div className = {statusStyles}>
 
-                                <div>Offline</div>
+                                <div>{statusMessage}</div>
                                 <span/>
 
                             </div>

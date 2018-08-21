@@ -9,8 +9,8 @@ import avatar from '../../theme/assets/homer.png';
 
 const config = {
     avatar,
-    currentUserFirstName: 'Tatiana',
-    currentUserLastName: 'Loza'
+    currentUserFirstName: 'Татьяна',
+    currentUserLastName: 'Лоза',
 };
 
 @hot(module)
@@ -21,11 +21,11 @@ export default class App extends Component{
                 <Provider value = {config} >
                     <Feed {...config}/>
                 </Provider>
-                {/*<Feed */}
-                {/*avatar = {config.avatar} другая форма записи*/}
-                {/*currentUserFirsName={config.currentUserFirsName}*/}
-                {/*currentUserLastName={config.currentUserLastName} */}
-                {/*/>*/}
+                            {/*<Feed */}
+                            {/*avatar = {config.avatar} другая форма записи*/}
+                            {/*currentUserFirsName={config.currentUserFirsName}*/}
+                            {/*currentUserLastName={config.currentUserLastName} */}
+                            {/*/>*/}
             </Catcher>
         );
     }

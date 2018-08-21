@@ -19,13 +19,13 @@ export class Composer extends Component {
     }
 
     _createPost(){
-        const { _createPost } = this.props;
+        const { _createPostAsync } = this.props;
         const { comment } = this.state;
 
         if (!comment.trim()) {
             return null;
         }
-        _createPost(comment);
+        _createPostAsync(comment);
         this.setState({
             comment:'',
         })
@@ -33,12 +33,11 @@ export class Composer extends Component {
 
     _handleFormSubmit = (event) => {
         event.preventDefault();
-        const { _createPost } = this.props;
         const { comment } = this.state;
         if (!comment.trim()) {
             return null;
         }
-        _createPost(comment);
+        this._createPost(comment);
         this.setState({
             comment: '',
         })

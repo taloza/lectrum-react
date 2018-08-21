@@ -1,16 +1,16 @@
-.feed {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    background-color: var(--paletteColor3);
+.feed : flex;
+    fle-direction: column;
 
-& .postInStart {
-      transform: scale(.5);
+      {plaiigdyx-items: center;
+  : 100vh;-min-h
+: var(--paletteColor3);
+ .postInStart {backgroundeisalnghtcolor
+ : scale(.5);&
       opacity: .01;
-  }
+  transform
 
-& .postInEnd {
+ .postInEnd {}
+&
       transform: scale(1);
       transition: opacity 500ms var(--cubic1),
       transform 500ms var(--cubic1);

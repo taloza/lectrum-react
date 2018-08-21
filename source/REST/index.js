@@ -1,1 +1,3 @@
-export { GROUP_ID, TOKEN, MAIN_URL } from './config';
+
+export {api} from './api';
+export { GROUP_ID, TOKEN, MAIN_URL, SOCKET_URL } from './config';

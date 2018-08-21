@@ -12,8 +12,6 @@ export default class Catcher extends Component {
         error: false
     }
 
-    //dfjhkxdjli
-
     componentDidCatch (error, stack) {
         this.setState({
             error: true
